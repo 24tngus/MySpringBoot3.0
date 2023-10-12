@@ -36,5 +36,6 @@ public class MyRunner implements ApplicationRunner {
         // ApplicationArguments는 main메서드의 (String[] args) argument를 전달 받음
         System.out.println("VM Argument foo = " + args.containsOption("foo"));
         System.out.println("Program argument bar = " + args.containsOption("bar"));
+
     }
 }
