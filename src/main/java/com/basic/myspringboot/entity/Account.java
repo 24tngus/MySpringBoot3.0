@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 @Entity
 public class Account {
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(unique = true, nullable = false)
