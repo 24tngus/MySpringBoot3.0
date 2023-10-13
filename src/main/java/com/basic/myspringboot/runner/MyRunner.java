@@ -1,5 +1,6 @@
 package com.basic.myspringboot.runner;
 
+import com.basic.myspringboot.dto.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
@@ -23,8 +24,12 @@ public class MyRunner implements ApplicationRunner {
     @Autowired
     private Environment environment;
 
+    @Autowired
+    private Customer customer;
+
     @Override
     public void run(ApplicationArguments args) throws Exception {
+        System.out.println("Customer 현재 모드 = " + customer.getName());
         // 포트 번호 받아오기
         System.out.println("Port Number = " + environment.getProperty("local.server.port"));
 
