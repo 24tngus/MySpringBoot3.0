@@ -1,6 +1,8 @@
 package com.basic.myspringboot.runner;
 
 import com.basic.myspringboot.dto.Customer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
@@ -10,7 +12,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
 @Component
-@Order(1)
+@Order(2)
 public class MyRunner implements ApplicationRunner {
     @Value("${myboot.name}")
     private String name;
@@ -27,20 +29,27 @@ public class MyRunner implements ApplicationRunner {
     @Autowired
     private Customer customer;
 
+    //로거 생성
+    Logger logger = LoggerFactory.getLogger(MyRunner.class);
+
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        System.out.println("Customer 현재 모드 = " + customer.getName());
-        // 포트 번호 받아오기
-        System.out.println("Port Number = " + environment.getProperty("local.server.port"));
-
+        // info
+        logger.info("Logger 클래스 이름 {}", logger.getClass().getName()); // ch.qos.logback.classic.Logger
+        logger.info("Customer 현재 모드 = {}", customer.getName());
+        logger.info("Port Number = {}", environment.getProperty("local.server.port"));
         // 환경변수 받아오기
-        System.out.println("myboot.name = " + name);
-        System.out.println("myboot.age = " + age);
-        System.out.println("myboot.fullName = " + fullName);
+        logger.info("myboot.name = {}", name);
+        logger.info("myboot.age = {}", age);
+        logger.info("myboot.fullName = {}", fullName);
 
+
+        // debug
         // ApplicationArguments는 main메서드의 (String[] args) argument를 전달 받음
-        System.out.println("VM Argument foo = " + args.containsOption("foo"));
-        System.out.println("Program argument bar = " + args.containsOption("bar"));
+        logger.debug("VM Argument foo = {} Program argument bar = {}",
+                args.containsOption("foo")
+                , args.containsOption("bar")
+        );
 
     }
 }
