@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+<body>
+<table>
+    <tr>
+        <th>Seq</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>EntryDate</th>
+    </tr>
+    <tr th:each="user, userStat : ${users}">
+        <td th:text="${userStat.count}"></td> <!-- id 연속적인 수로 출력 -->
+        <td th:text="${user.name}"></td>
+        <td th:text="${user.email}"></td>
+<!--        <td th:text="${user.createdAt}"></td>-->
+        <td th:text="${#temporals.format(user.createdAt, 'yyyy-MM-dd hh:mm')}"></td>
+    </tr>
+</table>
+<p><a href="/userspage/signup">Insert</a></p>
+</body>
+</html>
