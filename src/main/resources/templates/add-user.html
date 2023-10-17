@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <meta charset="UTF-8">
 <body>
-<!-- th:action="@{/userspage/adduser}"는 controller에서 userspage로 이동 -->
+<!-- th:action="@{/adduser}"를 th:action="@{/userspage/adduser}"로 변경 -->
 <!-- th:object="${user}" 의 user는 user객체의 클래스 이름 (소문자 변환 필요)-->
 <form action="#" th:action="@{/userspage/adduser}" th:object="${userReqDTO}" method="post">
     <label for="name">Name</label>
