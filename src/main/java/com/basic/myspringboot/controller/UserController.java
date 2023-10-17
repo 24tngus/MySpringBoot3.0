@@ -23,23 +23,31 @@ import java.util.List;
 public class UserController {
     private final UserService userService;
 
+    @GetMapping("/welcome")
+    public String welcome() {
+        return "Welcome this endpoint is not secure";
+    }
+
     @GetMapping("/first")
     public String leaf(Model model) {
         model.addAttribute("name", "스프링부트");
         return "leaf";
     }
 
+    // 등록 전에 목록 출력
     @GetMapping("/index")
     public ModelAndView index() {
         List<UserResDTO> userResDTOList = userService.getUsers();
         return new ModelAndView("index", "users", userResDTOList); // viewName, modelName, modelObject
     }
 
-    // 등록 페이지를 호출 해주는 메서드
+     // 등록 페이지를 호출 해주는 메서드
+
     @GetMapping("/signup")
     public String showSignUpForm(UserReqDTO user) {
         return "add-user";
     }
+
 
     // 입력 항목 검증을 한 후 등록 처리 메서드
     @PostMapping("/adduser")
@@ -65,11 +73,21 @@ public class UserController {
     @PostMapping("/update/{id}")
     public String updateUser(@PathVariable("id") long id, @Valid UserReqForm user, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            user.setId(id);
+            System.out.println(">> hasErrors user " + user);
+//            user.setId(id);
+            model.addAttribute("user", user);
             return "update-user";
+//            return "redirect:/userspage/edit/{id}(id=${user.id})";
         }
 
         userService.updateUserForm(user);
+        return "redirect:/userspage/index";
+    }
+
+    // 삭제
+    @GetMapping("/delete/{id}")
+    public String deleteUser(@PathVariable("id") long id) {
+        userService.deleteUser(id);
         return "redirect:/userspage/index";
     }
 

@@ -3,14 +3,12 @@ package com.basic.myspringboot.dto;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @NoArgsConstructor // 기본 생성자 생성
 @AllArgsConstructor
 @Getter @Setter
+@ToString
 public class UserReqForm {
     private Long id;
 
