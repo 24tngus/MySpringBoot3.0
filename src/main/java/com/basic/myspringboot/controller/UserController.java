@@ -42,7 +42,6 @@ public class UserController {
     }
 
      // 등록 페이지를 호출 해주는 메서드
-
     @GetMapping("/signup")
     public String showSignUpForm(UserReqDTO user) {
         return "add-user";
@@ -70,6 +69,7 @@ public class UserController {
         return "update-user";
     }
 
+    // 수정
     @PostMapping("/update/{id}")
     public String updateUser(@PathVariable("id") long id, @Valid UserReqForm user, BindingResult result, Model model) {
         if (result.hasErrors()) {
