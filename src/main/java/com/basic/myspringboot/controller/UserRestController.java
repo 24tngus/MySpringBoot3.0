@@ -5,6 +5,7 @@ import com.basic.myspringboot.dto.UserResDTO;
 import com.basic.myspringboot.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,6 +16,10 @@ import java.util.List;
 public class UserRestController {
     private final UserService userService;
 
+    @GetMapping("/welcome")
+    public String welcome() {
+        return "Welcome this endpoint is not secure";
+    } // UserController에서 UserRestController로 이동하니까 됨
     // 등록
     @PostMapping
     public UserResDTO saveUser(@RequestBody UserReqDTO userReqDTO) {
@@ -23,12 +28,14 @@ public class UserRestController {
 
     // 조회
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ROLE_USER')")
     public UserResDTO getUserById(@PathVariable Long id) {
         return userService.getUserById(id);
     }
 
     // 전체 목록 조회
     @GetMapping
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public List<UserResDTO> getUsers() {
         return userService.getUsers();
     }

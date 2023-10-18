@@ -1,4 +1,4 @@
-package com.basic.myspringboot.advice;
+package com.basic.myspringboot.exception.advice;
 
 import com.basic.myspringboot.exception.BusinessException;
 import com.basic.myspringboot.exception.SystemException;
