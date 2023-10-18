@@ -1,4 +1,4 @@
-package com.basic.myspringboot.config;
+package com.basic.myspringboot.security.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,7 +24,9 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> {
-                    auth.requestMatchers("/api/users/welcome", "/userspage/**").permitAll()
+                    auth.requestMatchers("/api/users/welcome",
+                                    "/userspage/**",
+                                    "/userinfos/new").permitAll()
                             .requestMatchers("/api/users/**").authenticated();
                 })
                 .formLogin(withDefaults())
